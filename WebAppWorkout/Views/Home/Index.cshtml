@@ -1,0 +1,81 @@
+﻿@model WorkoutCreateViewModel
+@{
+    ViewData["title"] = "Добавление";
+}
+
+
+<div class="row">
+    <div style="margin: 20px" class="col-md-5">
+        <h4>Добавить тренировку</h4>
+        <form asp-action="Index" method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <div class="mb-3">
+                <label asp-for="NewWorkout.Duration" class="form-label"></label>
+                <input asp-for="NewWorkout.Duration" class="form-control" />
+                <span asp-validation-for="NewWorkout.Duration" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="NewWorkout.Calories" class="form-label"></label>
+                <input type="number" asp-for="NewWorkout.Calories" class="form-control" rows="3" />
+                <span asp-validation-for="NewWorkout.Calories" class="text-danger"></span>
+            </div>
+
+         @*    <div class="mb-3">
+                <label asp-for="NewWorkout.Created" class="form-label"></label>
+                <input type="datetime" asp-for="NewWorkout.Created" class="form-control" rows="3" />
+                <span asp-validation-for="NewWorkout.Created" class="text-danger"></span>
+            </div>
+ *@
+            <div class="mb-3">
+                <label asp-for="NewWorkout.WorkoutType" class="form-label"></label>
+                <select asp-for="NewWorkout.WorkoutType" class="form-select">
+                    @foreach (var item in new List<string> { "Дрочка", "Отлиз бабке за гречку", "Ебля с кошкой", "Минет хомяка" })
+                    {
+                        <option value="@item">@item</option>
+                    }
+                    <span asp-validation-for="NewWorkout.WorkoutType" class="text-danger"></span>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="NewWorkout.Smile" class="form-label"></label>
+                <select asp-for="NewWorkout.Smile" class="form-select">
+                    @foreach (var item in new List<string> { "😒", "😘", "😂", "😊", "😁" })
+                    {
+                        <option value="@item">@item</option>
+                    }
+                    <span asp-validation-for="NewWorkout.Smile" class="text-danger"></span>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Отправить</button>
+            @*<a asp-action="Stats" class="btn btn-outline-secondary">Статистика :)</a>*@
+        </form>
+    </div>
+
+    <div style="margin: 20px; margin-top:0;" class="col-md-7">
+        <h4>Всего тренировок: @Model.Workouts.Count</h4>
+        @if (WorkoutContext.All.Count == 0)
+        {
+            <p class="text-muted">Пока что никто не оставил отзыв :(</p>
+        }
+        else
+        {
+            foreach (var item in Model.Workouts)
+            {
+                <div class="card mb-2">
+                    <div class="card-body">
+                        <strong>@item.WorkoutType</strong>
+                        <small class="text-muted float-end">
+                            @item.Created.ToString("dd.MM HH:mm")
+                        </small>
+                        <p class="mb-0 mt-2">@item.Calories</p>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+
+</div>
