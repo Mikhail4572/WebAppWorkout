@@ -22,12 +22,6 @@
                 <span asp-validation-for="NewWorkout.Calories" class="text-danger"></span>
             </div>
 
-         @*    <div class="mb-3">
-                <label asp-for="NewWorkout.Created" class="form-label"></label>
-                <input type="datetime" asp-for="NewWorkout.Created" class="form-control" rows="3" />
-                <span asp-validation-for="NewWorkout.Created" class="text-danger"></span>
-            </div>
- *@
             <div class="mb-3">
                 <label asp-for="NewWorkout.WorkoutType" class="form-label"></label>
                 <select asp-for="NewWorkout.WorkoutType" class="form-select">
@@ -51,7 +45,7 @@
             </div>
 
             <button type="submit" class="btn btn-primary">Отправить</button>
-            @*<a asp-action="Stats" class="btn btn-outline-secondary">Статистика :)</a>*@
+            <a asp-action="Stats" class="btn btn-outline-secondary">Статистика :)</a>
         </form>
     </div>
 
@@ -59,7 +53,7 @@
         <h4>Всего тренировок: @Model.Workouts.Count</h4>
         @if (WorkoutContext.All.Count == 0)
         {
-            <p class="text-muted">Пока что никто не оставил отзыв :(</p>
+            <p class="text-muted">Пока что 0 тренировок :(</p>
         }
         else
         {

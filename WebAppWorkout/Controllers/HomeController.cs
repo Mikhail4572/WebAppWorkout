@@ -7,7 +7,7 @@ namespace WebAppWorkout.Controllers;
 public class HomeController : Controller
 {
     public IActionResult Index() => View(BuildViewModel());
-    
+
 
     [HttpPost]
     public IActionResult Index(WorkoutItem newWorkout)
@@ -20,11 +20,11 @@ public class HomeController : Controller
         return RedirectToAction("Index");
     }
 
+    public IActionResult Stats() => View();
 
     private WorkoutCreateViewModel BuildViewModel(WorkoutItem? newReview = null) => new()
     {
         Workouts = [.. WorkoutContext.All.OrderByDescending(x => x.Created)],
         NewWorkout = newReview ?? new()
     };
-
 }
